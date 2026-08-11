@@ -39,6 +39,7 @@ Resources:
           dnf install -y nginx
           systemctl enable nginx
           systemctl start nginx
+          chown -R ec2-user:ec2-user /usr/share/nginx/html
 
 Outputs:
   PublicIP:
