@@ -575,7 +575,7 @@ body.dark .glass {
 .contact-wrapper input, .contact-wrapper textarea {
   padding: 0.8rem 1.2rem;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   background: rgba(255, 255, 255, 0.02);
   color: inherit;
   font-family: inherit;
