@@ -4,5 +4,5 @@ const message = document.getElementById('message');
 
 // Add click event listener to the button
 button.addEventListener('click', () => {
-    message.textContent = "You clicked the button! JavaScript is working 🎉";
+    message.textContent = "Congratulationsx Your Account Has been Hacked🎉";
 });
