@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-DEFAULT_URL="http://main-alb-355676448.us-east-1.elb.amazonaws.com/"
+DEFAULT_URL="http://main-alb-1040846936.us-east-1.elb.amazonaws.com/"
 URL_IN="${1:-$DEFAULT_URL}"
 DURATION="${2:-900}"
 WORKERS="${3:-50}"
