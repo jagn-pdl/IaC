@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definitely Not Hacking</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #050505;
+            color: #00ff66;
+            font-family: "Courier New", monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .screen {
+            width: min(700px, 90%);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: clamp(28px, 5vw, 48px);
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px #00ff66;
+        }
+
+        .subtitle {
+            color: #aaa;
+            margin-bottom: 35px;
+        }
+
+        .terminal {
+            border: 2px solid #00ff66;
+            padding: 30px;
+            box-shadow: 0 0 25px rgba(0, 255, 102, 0.25);
+            background: #090909;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 28px;
+            border: 2px solid #00ff66;
+            margin: 25px 0 10px;
+            padding: 3px;
+        }
+
+        .progress {
+            width: 0%;
+            height: 100%;
+            background: #00ff66;
+            box-shadow: 0 0 15px #00ff66;
+            transition: width 0.2s;
+        }
+
+        #percent {
+            margin-bottom: 30px;
+        }
+
+        button {
+            font-family: "Courier New", monospace;
+            font-weight: bold;
+            cursor: pointer;
+            border: 2px solid #00ff66;
+            background: #00ff66;
+            color: #000;
+            padding: 15px 25px;
+            font-size: 18px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #00ff66;
+        }
+
+        #page2 {
+            display: none;
+            text-align: center;
+        }
+
+        #question {
+            font-size: clamp(30px, 6vw, 60px);
+            margin-bottom: 50px;
+            text-shadow: 0 0 15px #00ff66;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            min-height: 100px;
+        }
+
+        #yes {
+            background: #00ff66;
+            color: black;
+            z-index: 5;
+        }
+
+        #no {
+            background: #111;
+            color: #ff4444;
+            border-color: #ff4444;
+        }
+
+        #celebration {
+            display: none;
+            text-align: center;
+        }
+
+        #celebration h1 {
+            font-size: clamp(60px, 15vw, 150px);
+            color: #00ff66;
+        }
+
+        #celebration p {
+            color: white;
+            font-size: 25px;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 18px;
+            top: -30px;
+            animation: fall linear forwards;
+            z-index: 100;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+            }
+        }
+
+        .blink {
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- FIRST PAGE -->
+    <div class="screen" id="page1">
+
+        <div class="terminal">
+
+            <h1>HEY PARINDA</h1>
+
+            <div class="subtitle">
+                ⚠ UNAUTHORIZED ACCESS DETECTED ⚠
+            </div>
+
+            <p>
+                Initializing extremely sophisticated hacking...
+            </p>
+
+            <p id="status">Accessing mainframe...</p>
+
+            <div class="progress-container">
+                <div class="progress" id="progress"></div>
+            </div>
+
+            <div id="percent">0%</div>
+
+            <p class="blink">
+                DO NOT PANIC
+            </p>
+
+            <button id="continueBtn" style="display:none;">
+                CLICK HERE OR ELSE
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SECOND PAGE -->
+    <div class="screen" id="page2">
+
+        <div class="terminal">
+
+            <div id="question">
+                Do you love me?
+            </div>
+
+            <div class="buttons">
+
+                <button id="yes">
+                    YES ❤️
+                </button>
+
+                <button id="no">
+                    NO 😈
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CELEBRATION -->
+    <div class="screen" id="celebration">
+
+        <h1>YIPPIE 🎉</h1>
+
+        <p>
+            go back to studying stinky
+        </p>
+
+    </div>
+
+    
+    <script>
+
+        // Fake hacking progress
+        let progress = 0;
+
+        const progressBar = document.getElementById("progress");
+        const percent = document.getElementById("percent");
+        const status = document.getElementById("status");
+        const continueBtn = document.getElementById("continueBtn");
+
+        const messages = [
+            "Scanning device...",
+            "Finding suspicious activities...",
+            "Downloading absolutely nothing...",
+            "Bypassing imaginary firewall...",
+            "Stealing your Wi-Fi...",
+            "Calculating your fate...",
+            "Almost there...",
+            "Hack complete."
+        ];
+
+        let messageIndex = 0;
+
+        const fakeHack = setInterval(() => {
+
+            progress += Math.floor(Math.random() * 4) + 1;
+
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(fakeHack);
+
+                status.textContent = "HACK COMPLETE. VERY SCARY.";
+                continueBtn.style.display = "inline-block";
+            } else {
+                if (progress % 12 < 4 && messageIndex < messages.length - 1) {
+                    messageIndex++;
+                }
+
+                status.textContent = messages[messageIndex];
+            }
+
+            progressBar.style.width = progress + "%";
+            percent.textContent = progress + "%";
+
+        }, 180);
+
+
+        // Go to Yes/No page
+        continueBtn.addEventListener("click", () => {
+
+            document.getElementById("page1").style.display = "none";
+            document.getElementById("page2").style.display = "block";
+
+        });
+
+
+        // The NO button's inevitable downfall
+        const noButton = document.getElementById("no");
+        const yesButton = document.getElementById("yes");
+
+        let yesSize = 1;
+
+        noButton.addEventListener("click", () => {
+
+            yesSize += 0.35;
+
+            yesButton.style.transform = `scale(${yesSize})`;
+
+            // Make the NO button increasingly difficult to use
+            noButton.style.transform =
+                `translate(${Math.random() * 200 - 100}px,
+                           ${Math.random() * 150 - 75}px)`;
+
+            // Eventually YES consumes the screen
+            if (yesSize >= 7) {
+
+                yesButton.style.position = "fixed";
+                yesButton.style.inset = "0";
+                yesButton.style.width = "100vw";
+                yesButton.style.height = "100vh";
+                yesButton.style.fontSize = "60px";
+                yesButton.style.transform = "none";
+
+                noButton.style.display = "none";
+            }
+        });
+
+
+        // YES = YIPPIE
+        yesButton.addEventListener("click", () => {
+
+            document.getElementById("page2").style.display = "none";
+            document.getElementById("celebration").style.display = "block";
+
+            launchConfetti();
+
+        });
+
+
+        // Confetti
+        function launchConfetti() {
+
+            const pieces = 180;
+
+            for (let i = 0; i < pieces; i++) {
+
+                const confetti = document.createElement("div");
+
+                confetti.classList.add("confetti");
+
+                confetti.style.left = Math.random() * 100 + "vw";
+
+                confetti.style.backgroundColor =
+                    `hsl(${Math.random() * 360}, 100%, 60%)`;
+
+                confetti.style.animationDuration =
+                    (Math.random() * 3 + 2) + "s";
+
+                confetti.style.animationDelay =
+                    Math.random() * 1.5 + "s";
+
+                confetti.style.transform =
+                    `rotate(${Math.random() * 360}deg)`;
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 6000);
+            }
+        }
+
+    </script>
+
+</body>
+</html>
