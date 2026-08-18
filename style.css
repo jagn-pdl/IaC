@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: auto;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+nav a {
+    margin-right: 15px;
+}
+
+footer {
+    margin-top: 40px;
+}
